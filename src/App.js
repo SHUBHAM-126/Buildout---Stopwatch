@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react'
 
 function App() {
+
+  const [isRunning, setIsRunning] = useState(false)
+  const [elapsedTime, setElapsedTime] = useState(0)
+
+  useEffect(() => {
+
+    let intervalId;
+
+    if (isRunning) {
+      intervalId = setTimeout(() => {
+        setElapsedTime((prev) => prev + 1)
+      }, 1000)
+    }
+
+    return (() => clearInterval(intervalId))
+
+  }, [elapsedTime, isRunning])
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time/60);
+    const seconds = time % 60
+
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Stopwatch</h1>
+      <p>Time: {formatTime(elapsedTime)}</p>
+      <button onClick={() => setIsRunning(!isRunning)}>{isRunning ? "Stop" : "Start"}</button>
+      <button onClick={() => {
+        setIsRunning(false)
+        setElapsedTime(0)
+      }}>Reset</button>
     </div>
   );
 }
