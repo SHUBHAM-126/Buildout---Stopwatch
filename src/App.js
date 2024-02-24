@@ -15,7 +15,7 @@ function App() {
       }, 1000)
     }
 
-    return (() => clearInterval(intervalId))
+    return (() => clearTimeout(intervalId))
 
   }, [elapsedTime, isRunning])
 
