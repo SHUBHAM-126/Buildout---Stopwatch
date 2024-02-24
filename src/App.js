@@ -10,14 +10,14 @@ function App() {
     let intervalId;
 
     if (isRunning) {
-      intervalId = setTimeout(() => {
+      intervalId = setInterval(() => {
         setElapsedTime((prev) => prev + 1)
       }, 1000)
     }
 
-    return (() => clearTimeout(intervalId))
+    return (() => clearInterval(intervalId))
 
-  }, [elapsedTime, isRunning])
+  }, [isRunning])
 
   const formatTime = (time) => {
     const minutes = Math.floor(time/60);
