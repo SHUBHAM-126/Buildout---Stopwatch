@@ -29,7 +29,7 @@ function App() {
   return (
     <div>
       <h1>Stopwatch</h1>
-      <p>Time: {formatTime(elapsedTime)}</p>
+      <p>{`Time: ${formatTime(elapsedTime)}`}</p>
       <button onClick={() => setIsRunning(!isRunning)}>{isRunning ? "Stop" : "Start"}</button>
       <button onClick={() => {
         setIsRunning(false)
